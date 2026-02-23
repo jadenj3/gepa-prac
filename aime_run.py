@@ -10,7 +10,7 @@ result = gepa.optimize(
   trainset=trainset,
   valset=valset,
   task_lm="openai/gpt-4.1-mini",
-  max_metric_calls=150,
+  max_metric_calls=300,
   reflection_lm="openai/gpt-5",
 )
 
