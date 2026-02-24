@@ -12,6 +12,7 @@ result = gepa.optimize(
   task_lm="openai/gpt-4.1-mini",
   max_metric_calls=5000,
   reflection_lm="openai/gpt-5",
+  raise_on_exception=False
 )
 
 print("Optimized prompt:", result.best_candidate["system_prompt"])
