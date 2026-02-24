@@ -89,7 +89,7 @@ class DefaultAdapter(GEPAAdapter[DefaultDataInst, DefaultTrajectory, DefaultRoll
         self,
         model: str | ChatCompletionCallable,
         evaluator: Evaluator | None = None,
-        max_litellm_workers: int = 10,
+        max_litellm_workers: int = 60,
         litellm_batch_completion_kwargs: dict[str, Any] | None = None,
     ):
         if isinstance(model, str):
