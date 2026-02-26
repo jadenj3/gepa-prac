@@ -52,7 +52,7 @@ class ExperimentTracker:
             import wandb  # type: ignore
 
             if self.wandb_api_key:
-                wandb.login(key=self.wandb_api_key, verify=True)
+                wandb.login(verify=True)
             else:
                 wandb.login()
         except ImportError:
