@@ -1,6 +1,8 @@
+import os
 import time
 
 import gepa
+from gepa.logging.logger import Logger
 
 
 class TimingCallback:
@@ -41,18 +43,27 @@ class TimingCallback:
 
 trainset, valset, _ = gepa.examples.aime.init_dataset()
 
-result = gepa.optimize(
-    seed_candidate={
-        "system_prompt": "You are a helpful assistant. Answer the question. "
-        "Put your final answer in the format '### <answer>'"
-    },
-    trainset=trainset,
-    valset=valset,
-    task_lm="openai/gpt-4.1-mini",
-    max_metric_calls=5000,
-    reflection_lm="openai/gpt-5",
-    raise_on_exception=False,
-    callbacks=[TimingCallback()],
-)
+with Logger("aime_run_log.txt") as log:
+    result = gepa.optimize(
+        seed_candidate={
+            "system_prompt": "You are a helpful assistant. Answer the question. "
+            "Put your final answer in the format '### <answer>'"
+        },
+        trainset=trainset,
+        valset=valset,
+        task_lm="openai/gpt-4.1-mini",
+        max_metric_calls=1000,
+        reflection_lm="openai/gpt-5",
+        raise_on_exception=False,
+        callbacks=[TimingCallback()],
+        logger=log,
+        run_dir="./runs/aime",
+        use_wandb=True,
+        wandb_api_key=os.environ.get("WANDB_API_KEY"),
+        wandb_init_kwargs={
+            "project": "gepa_aime",
+            "name": "aime_run",
+        },
+    )
 
 print("Optimized prompt:", result.best_candidate["system_prompt"])
