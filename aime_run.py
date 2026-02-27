@@ -56,7 +56,7 @@ with Logger("aime_run_log.txt") as log:
         trainset=trainset,
         valset=valset,
         task_lm="openai/gpt-4.1-mini",
-        max_metric_calls=1000,
+        max_metric_calls=3000,
         reflection_lm="openai/gpt-5",
         raise_on_exception=False,
         callbacks=[TimingCallback()],
