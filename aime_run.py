@@ -1,5 +1,6 @@
 import os
 import time
+import uuid
 
 import gepa
 from gepa.logging.logger import Logger
@@ -43,6 +44,9 @@ class TimingCallback:
 
 trainset, valset, _ = gepa.examples.aime.init_dataset()
 
+run_id = uuid.uuid4().hex[:8]
+run_dir = f"./runs/aime_{run_id}"
+
 with Logger("aime_run_log.txt") as log:
     result = gepa.optimize(
         seed_candidate={
@@ -57,12 +61,12 @@ with Logger("aime_run_log.txt") as log:
         raise_on_exception=False,
         callbacks=[TimingCallback()],
         logger=log,
-        run_dir="./runs/aime",
+        run_dir=run_dir,
         use_wandb=True,
         wandb_api_key=os.environ.get("WANDB_API_KEY"),
         wandb_init_kwargs={
             "project": "gepa_aime",
-            "name": "aime_run",
+            "name": f"aime_run_{run_id}",
         },
     )
 
