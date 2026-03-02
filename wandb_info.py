@@ -16,4 +16,18 @@ def get_valset_score(target_iteration):
 
     print(f"Iteration {target_iteration}: {len(scores)} runs, avg = {sum(scores) / len(scores):.4f}")
 
-get_valset_score(target_iteration)
+
+def get_latest_valset_scores():
+    latest_scores = []
+    for run in runs:
+        score = run.summary.get("best_valset_agg_score")
+        if score is not None:
+            latest_scores.append(score)
+            print(f"  {run.name}: {score:.4f}")
+    if latest_scores:
+        print(f"\n{len(latest_scores)} runs, avg = {sum(latest_scores)/len(latest_scores):.4f}")
+    else:
+        print("No runs with best_valset_agg_score found")
+
+
+get_latest_valset_scores()
