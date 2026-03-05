@@ -63,6 +63,7 @@ with Logger("aime_run_log.txt") as log:
         logger=log,
         run_dir=run_dir,
         use_wandb=True,
+        candidate_selection_strategy="current_best",
         wandb_api_key=os.environ.get("WANDB_API_KEY"),
         wandb_init_kwargs={
             "project": "gepa_aime",
