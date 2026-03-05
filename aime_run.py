@@ -66,7 +66,7 @@ with Logger("aime_run_log.txt") as log:
         candidate_selection_strategy="current_best",
         wandb_api_key=os.environ.get("WANDB_API_KEY"),
         wandb_init_kwargs={
-            "project": "gepa_aime",
+            "project": "gepa_aime_greedy",
             "name": f"aime_run_{run_id}",
         },
     )
