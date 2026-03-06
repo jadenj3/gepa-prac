@@ -1,7 +1,7 @@
 import wandb
 
 api = wandb.Api()
-runs = api.runs("jaden8000-123/gepa_aime")
+runs = api.runs("jaden8000-123/gepa_aime_greedy")
 
 scores = []
 target_iteration = 16  # change this
